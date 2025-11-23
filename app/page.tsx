@@ -74,11 +74,11 @@ export default function Page() {
               priority
               className="
                 object-cover
-                scale-70
+                scale-65
                 transition-transform
-                duration-[4000ms]
+                duration-10000
                 ease-out
-                hover:scale-75
+                hover:scale-70
               "
             />
             {/* Subtle overlay for contrast */}
