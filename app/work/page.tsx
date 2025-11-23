@@ -36,14 +36,15 @@ type Category = {
   title: string;
   description: string;
   slides: CategorySlide[];
+  /** per-section background (for the whole block) */
+  background?: string;
 };
 
-// VAMA-ish palette
-const VAMA_TEAL = "#0D4341";
-const RESIDENTIAL_ACCENT = "#F4E0C8"; // warm beige / nude
+// ✨ Palette – change this hex to tweak Residential highlight
+const RESIDENTIAL_ACCENT = "#F3CBA7"; // try replacing with any #HEX you like
 const COMMERCIAL_ACCENT = "#D4ECE7"; // soft muted teal
 
-// Different BGs for residential vs commercial section
+// Different BGs for residential vs commercial section (overall tone)
 const RESIDENTIAL_BG = "#0B3B38";
 const COMMERCIAL_BG = "#062629";
 
@@ -53,6 +54,7 @@ const residentialCategories: Category[] = [
     title: "Sofas & Loungers",
     description:
       "Deep, sink-in sofas, loungers and sectionals tailored to your living room layout.",
+    background: "#0B3B38",
     slides: [
       {
         src: "/images/sofa1.jpg",
@@ -81,6 +83,7 @@ const residentialCategories: Category[] = [
     title: "Beds & Headboards",
     description:
       "Custom beds, backrests and side tables that actually match your room story.",
+    background: "#0A3530",
     slides: [
       {
         src: "/images/bed1.jpg",
@@ -109,6 +112,7 @@ const residentialCategories: Category[] = [
     title: "Chairs & Accent Pieces",
     description:
       "Armchairs, loungers, reading chairs and accent pieces that pull a room together.",
+    background: "#0D4341",
     slides: [
       {
         src: "/images/chair1.jpg",
@@ -137,6 +141,7 @@ const residentialCategories: Category[] = [
     title: "Dining Sets",
     description:
       "Dining tables, chairs and sideboards built for everyday use and weekend hosting.",
+    background: "#08302C",
     slides: [
       {
         src: "/work/residential/dining-1.jpg",
@@ -168,6 +173,7 @@ const kidsCategories: Category[] = [
     title: "Kids Beds & Bunks",
     description:
       "Bunk beds, pull-outs and playful setups that keep siblings happy and safe.",
+    background: "#0A3430",
     slides: [
       {
         src: "/work/residential/kids-beds-1.jpg",
@@ -196,6 +202,7 @@ const kidsCategories: Category[] = [
     title: "Kids Storage & Study",
     description:
       "Study tables, bookshelves and toy storage that actually make space.",
+    background: "#0B3935",
     slides: [
       {
         src: "/work/residential/kids-storage-1.jpg",
@@ -227,6 +234,7 @@ const commercialCategories: Category[] = [
     title: "Ergonomic Chairs",
     description:
       "Task chairs and executive seating customised for long hours and different roles.",
+    background: "#062629",
     slides: [
       {
         src: "/work/commercial/chairs-1.jpg",
@@ -255,6 +263,7 @@ const commercialCategories: Category[] = [
     title: "Workstations & Tables",
     description:
       "Linear workstations, islands and manager desks planned for your floor plate.",
+    background: "#053133",
     slides: [
       {
         src: "/work/commercial/workstations-1.jpg",
@@ -283,6 +292,7 @@ const commercialCategories: Category[] = [
     title: "Cafés & Breakout Zones",
     description:
       "Pantry, café corners and breakout seating that make teams actually use the space.",
+    background: "#073338",
     slides: [
       {
         src: "/work/commercial/cafe-1.jpg",
@@ -311,6 +321,7 @@ const commercialCategories: Category[] = [
     title: "Reception & Lobbies",
     description:
       "Reception desks, waiting lounges and lobby setups that feel like your brand.",
+    background: "#052528",
     slides: [
       {
         src: "/work/commercial/reception-1.jpg",
@@ -349,64 +360,87 @@ export default function WorkPage() {
   const workBgColor = isResidential ? RESIDENTIAL_BG : COMMERCIAL_BG;
 
   return (
-    <div className="min-h-screen bg-[#0D4341] text-white">
+    <div className="min-h-screen bg-[#686604bd] text-white">
       <Header />
 
       <main>
-        {/* Hero + Tabs */}
-        <section className="pt-32 pb-12">
+        {/* Hero only – no tabs inside card now */}
+        <section className="pt-32 pb-8">
           <div className="container mx-auto px-6">
-            <div className="max-w-5xl mx-auto rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl px-8 py-10 md:px-12 md:py-12 shadow-[0_22px_80px_rgba(0,0,0,0.55)]">
-              <div className="mb-8 text-center space-y-3">
+            <div className="max-w-3xl mx-auto rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl px-8 py-10 md:px-12 md:py-12 shadow-[0_22px_80px_rgba(0,0,0,0.55)]">
+              <div className="mb-2 text-center space-y-3">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight text-balance">
                   Furniture that fits the{" "}
                   <span className="underline decoration-white/50 underline-offset-8">
                     space
                   </span>
-                  , not the catalog.
                 </h2>
               </div>
+            </div>
+          </div>
+        </section>
 
-              {/* Tabs */}
-              <div className="flex flex-col gap-4 md:flex-row md:gap-6 justify-center">
-                <button
-                  type="button"
-                  onClick={() => setActiveTab("residential")}
-                  className={[
-                    "flex-1 rounded-full py-3.5 px-6 text-base md:text-lg font-serif font-semibold transition-all duration-300 border",
-                    "hover:-translate-y-[1px] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]",
-                    activeTab === "residential"
-                      ? "border-transparent text-[#3C2A19] shadow-xl"
-                      : "border-white/15 text-white/75 hover:bg-white/5",
-                  ].join(" ")}
-                  style={
-                    activeTab === "residential"
-                      ? { backgroundColor: RESIDENTIAL_ACCENT }
-                      : {}
-                  }
-                >
-                  Residential
-                </button>
+        {/* GLASS TABS STRIP – below hero */}
+        <section className="border-t border-white/10 bg-transparent">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="mt-4 md:mt-6 flex w-full gap-3 md:gap-4 max-w-5xl mx-auto">
+              {/* Residential tab */}
+              <button
+                type="button"
+                onClick={() => setActiveTab("residential")}
+                className={[
+                  "flex-1 rounded-2xl md:rounded-3xl px-4 md:px-6 py-3.5 md:py-4",
+                  "text-[11px] md:text-xs lg:text-sm font-serif font-semibold uppercase tracking-[0.28em]",
+                  "border bg-white/7 backdrop-blur-xl",
+                  "transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]",
+                  "hover:-translate-y-[2px] hover:scale-[1.01]",
+                  "hover:shadow-[0_18px_45px_rgba(0,0,0,0.65)]",
+                  activeTab === "residential"
+                    ? "text-[#301a11] shadow-[0_18px_55px_rgba(0,0,0,0.75)] border-white/60"
+                    : "text-white/70 border-white/20 hover:border-white/40",
+                ].join(" ")}
+                style={
+                  activeTab === "residential"
+                    ? {
+                        background: `linear-gradient(135deg, ${RESIDENTIAL_ACCENT}, rgba(12, 12, 12, 0.35))`,
+                      }
+                    : {
+                        background:
+                          "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(0,0,0,0.25))",
+                      }
+                }
+              >
+                Residential
+              </button>
 
-                <button
-                  type="button"
-                  onClick={() => setActiveTab("commercial")}
-                  className={[
-                    "flex-1 rounded-full py-3.5 px-6 text-base md:text-lg font-serif font-semibold transition-all duration-300 border",
-                    "hover:-translate-y-[1px] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]",
-                    activeTab === "commercial"
-                      ? "border-transparent text-[#0E3433] shadow-xl"
-                      : "border-white/15 text-white/75 hover:bg-white/5",
-                  ].join(" ")}
-                  style={
-                    activeTab === "commercial"
-                      ? { backgroundColor: COMMERCIAL_ACCENT }
-                      : {}
-                  }
-                >
-                  Commercial
-                </button>
-              </div>
+              {/* Commercial tab */}
+              <button
+                type="button"
+                onClick={() => setActiveTab("commercial")}
+                className={[
+                  "flex-1 rounded-2xl md:rounded-3xl px-4 md:px-6 py-3.5 md:py-4",
+                  "text-[11px] md:text-xs lg:text-sm font-serif font-semibold uppercase tracking-[0.28em]",
+                  "border bg-white/7 backdrop-blur-xl",
+                  "transition-all duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]",
+                  "hover:-translate-y-[2px] hover:scale-[1.01]",
+                  "hover:shadow-[0_18px_45px_rgba(0,0,0,0.65)]",
+                  activeTab === "commercial"
+                    ? "text-[#062d2b] shadow-[0_18px_55px_rgba(0,0,0,0.75)] border-white/60"
+                    : "text-white/70 border-white/20 hover:border-white/40",
+                ].join(" ")}
+                style={
+                  activeTab === "commercial"
+                    ? {
+                        background: `linear-gradient(135deg, ${COMMERCIAL_ACCENT}, rgba(3, 35, 35, 0.65))`,
+                      }
+                    : {
+                        background:
+                          "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(0,0,0,0.25))",
+                      }
+                }
+              >
+                Commercial
+              </button>
             </div>
           </div>
         </section>
@@ -434,71 +468,78 @@ export default function WorkPage() {
               </div>
             </div>
 
-            {/* ONE BIG CARD PER ROW */}
+            {/* ONE BIG CARD PER ROW – each in its own section with its own bg */}
             <div className="space-y-10 md:space-y-12 max-w-5xl mx-auto">
               {currentCategories.map((category) => {
                 const Icon = category.icon;
                 return (
-                  <Card
+                  <section
                     key={category.title}
-                    className="group relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl text-white rounded-3xl shadow-[0_18px_60px_rgba(0,0,0,0.6)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_28px_90px_rgba(0,0,0,0.8)]"
+                    className="rounded-[1.75rem] px-1.5 md:px-2 py-6 md:py-8"
+                    style={{
+                      backgroundColor: category.background ?? workBgColor,
+                    }}
                   >
-                    {/* Luxe frame glow */}
-                    <div
-                      className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background:
-                          "radial-gradient(circle at 0 0, rgba(255,255,255,0.20), transparent 55%), radial-gradient(circle at 100% 100%, rgba(255,255,255,0.12), transparent 55%)",
-                      }}
-                    />
+                    <Card className="group relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl text-white rounded-3xl shadow-[0_18px_60px_rgba(0,0,0,0.6)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_28px_90px_rgba(0,0,0,0.8)]">
+                      {/* Luxe frame glow */}
+                      <div
+                        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{
+                          background:
+                            "radial-gradient(circle at 0 0, rgba(255,255,255,0.20), transparent 55%), radial-gradient(circle at 100% 100%, rgba(255,255,255,0.12), transparent 55%)",
+                        }}
+                      />
 
-                    {/* Carousel – wide framed */}
-                    <div className="relative p-4 pb-0 md:p-5 md:pb-0">
-                      <div className="rounded-2xl border border-white/15 overflow-hidden">
-                        <Carousel className="relative w-full">
-                          <CarouselContent>
-                            {category.slides.map((slide, i) => (
-                              <CarouselItem key={i}>
-                                <div className="relative h-64 md:h-80 overflow-hidden">
-                                  <img
-                                    src={slide.src}
-                                    alt={slide.alt}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                                  />
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-                                </div>
-                              </CarouselItem>
-                            ))}
-                          </CarouselContent>
-                          <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
-                          <CarouselNext className="right-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
-                        </Carousel>
-                      </div>
-                    </div>
-
-                    <CardContent className="relative px-6 md:px-8 pb-7 pt-5">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/30 shadow-inner"
-                            style={{ boxShadow: "0 0 22px rgba(0,0,0,0.65)" }}
-                          >
-                            <Icon className="h-5 w-5 text-white" />
-                          </div>
-                          <h4 className="text-xl md:text-2xl font-serif font-semibold">
-                            {category.title}
-                          </h4>
+                      {/* Carousel – wide framed */}
+                      <div className="relative p-4 pb-0 md:p-5 md:pb-0">
+                        <div className="rounded-2xl border border-white/15 overflow-hidden">
+                          <Carousel className="relative w-full">
+                            <CarouselContent>
+                              {category.slides.map((slide, i) => (
+                                <CarouselItem key={i}>
+                                  <div className="relative h-64 md:h-80 overflow-hidden">
+                                    <img
+                                      src={slide.src}
+                                      alt={slide.alt}
+                                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                                  </div>
+                                </CarouselItem>
+                              ))}
+                            </CarouselContent>
+                            <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
+                            <CarouselNext className="right-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
+                          </Carousel>
                         </div>
                       </div>
 
-                      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
-                        <p className="text-sm md:text-base text-white/75 leading-relaxed max-w-2xl">
-                          {category.description}
-                        </p>
-                        <Link href="/contact" className="shrink-0"></Link>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      <CardContent className="relative px-6 md:px-8 pb-7 pt-5">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                          <div className="flex items-center gap-3">
+                            <div
+                              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/30 shadow-inner"
+                              style={{
+                                boxShadow: "0 0 22px rgba(0,0,0,0.65)",
+                              }}
+                            >
+                              <Icon className="h-5 w-5 text-white" />
+                            </div>
+                            <h4 className="text-xl md:text-2xl font-serif font-semibold">
+                              {category.title}
+                            </h4>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
+                          <p className="text-sm md:text-base text.white/75 leading-relaxed max-w-2xl">
+                            {category.description}
+                          </p>
+                          <Link href="/contact" className="shrink-0"></Link>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </section>
                 );
               })}
             </div>
@@ -515,50 +556,60 @@ export default function WorkPage() {
                   </span>
                 </div>
 
-                {/* CHANGED HERE: stack kids cards vertically */}
+                {/* stacked vertically */}
                 <div className="space-y-8">
                   {kidsCategories.map((category) => {
                     const Icon = category.icon;
                     return (
-                      <Card
+                      <section
                         key={category.title}
-                        className="group relative overflow-hidden border border-white/12 bg.white/5 backdrop-blur-xl text-white rounded-3xl shadow-[0_18px_60px_rgba(0,0,0,0.6)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_26px_85px_rgba(0,0,0,0.85)]"
+                        className="rounded-[1.75rem] px-1.5 md:px-2 py-6 md:py-7"
+                        style={{
+                          backgroundColor: category.background ?? workBgColor,
+                        }}
                       >
-                        <div className="relative p-3 pb-0">
-                          <div className="rounded-2xl border border-white/18 overflow-hidden">
-                            <Carousel className="relative w-full">
-                              <CarouselContent>
-                                {category.slides.map((slide, i) => (
-                                  <CarouselItem key={i}>
-                                    <div className="relative h-56 md:h-60 overflow-hidden">
-                                      <img
-                                        src={slide.src}
-                                        alt={slide.alt}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                                      />
-                                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                                    </div>
-                                  </CarouselItem>
-                                ))}
-                              </CarouselContent>
-                              <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
-                              <CarouselNext className="right-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
-                            </Carousel>
+                        <Card className="group relative overflow-hidden border border-white/12 bg-white/5 backdrop-blur-xl text-white rounded-3xl shadow-[0_18px_60px_rgba(0,0,0,0.6)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_26px_85px_rgba(0,0,0,0.85)]">
+                          <div className="relative p-3 pb-0">
+                            <div className="rounded-2xl border border-white/18 overflow-hidden">
+                              <Carousel className="relative w-full">
+                                <CarouselContent>
+                                  {category.slides.map((slide, i) => (
+                                    <CarouselItem key={i}>
+                                      <div className="relative h-56 md:h-60 overflow-hidden">
+                                        <img
+                                          src={slide.src}
+                                          alt={slide.alt}
+                                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                                      </div>
+                                    </CarouselItem>
+                                  ))}
+                                </CarouselContent>
+                                <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
+                                <CarouselNext className="right-4 top-1/2 -translate-y-1/2 bg-black/45 text-white border-none hover:bg-black/70" />
+                              </Carousel>
+                            </div>
                           </div>
-                        </div>
 
-                        <CardContent className="relative p-6 pt-5">
-                          <div className="flex items-center gap-3 mb-3">
-                            <div className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/30"></div>
-                            <h4 className="text-xl font-serif font-semibold">
-                              {category.title}
-                            </h4>
-                          </div>
-                          <p className="text-sm text-white/80 leading-relaxed mb-4">
-                            {category.description}
-                          </p>
-                        </CardContent>
-                      </Card>
+                          <CardContent className="relative p-6 pt-5">
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/30">
+                                <Icon className="h-4 w-4 text-white" />
+                              </div>
+                              <h4 className="text-xl font-serif font-semibold">
+                                {category.title}
+                              </h4>
+                            </div>
+                            <p className="text-sm text-white/80 leading-relaxed mb-4">
+                              {category.description}
+                            </p>
+                            <span className="text-[11px] uppercase tracking-[0.22em] text-white/55">
+                              5 room angles · bunk + storage
+                            </span>
+                          </CardContent>
+                        </Card>
+                      </section>
                     );
                   })}
                 </div>
@@ -568,7 +619,7 @@ export default function WorkPage() {
         </section>
 
         {/* CTA section */}
-        <section className="py-20 bg-gradient-to-br from.black via-[#052120] to-[#0D4341] border-t border-white/10">
+        <section className="py-20 bg-gradient-to-br from-black via-[#052120] to-[#0D4341] border-t border-white/10">
           <div className="container mx-auto px-6 text-center">
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-5">
               {isResidential
@@ -593,20 +644,20 @@ export default function WorkPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-14 border-t border-white/10">
+      <footer className="bg-[#696a0d] text-white py-14 border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-center text-center space-y-5">
             <h2 className="text-2xl md:text-3xl font-serif font-bold">
               VAMA Living
             </h2>
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-white/80">
               Factory-to-home custom furniture · Hyderabad
             </p>
-            <div className="space-y-1 text-white/60 text-sm">
+            <div className="space-y-1 text-white/80 text-sm">
               <p>contact@vamaliving.com · +91 XXX XXX XXXX</p>
               <p>Hyderabad, India</p>
             </div>
-            <p className="text-xs text-white/45 pt-2">
+            <p className="text-xs text-white/80 pt-2">
               © 2025 VAMA Living. All rights reserved.
             </p>
           </div>

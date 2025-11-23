@@ -58,7 +58,7 @@ const kidsImages = [
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-[#0D4341]">
+    <div className="min-h-screen bg-[#D8B68A]">
       {/* Header */}
       <Header />
 
@@ -73,13 +73,13 @@ export default function Page() {
               fill
               priority
               className="
-        object-cover
-        scale-70
-        transition-transform
-        duration-[4000ms]
-        ease-out
-        hover:scale-75
-      "
+                object-cover
+                scale-70
+                transition-transform
+                duration-[4000ms]
+                ease-out
+                hover:scale-75
+              "
             />
             {/* Subtle overlay for contrast */}
             <div className="absolute inset-0 bg-black/25" />
@@ -90,16 +90,16 @@ export default function Page() {
             <Link href="/work">
               <Button
                 className="
-          rounded-full px-10 py-4 text-lg font-sans h-auto
-          bg-white/95 text-[#0D4341] border border-white/70
-          shadow-[0_18px_40px_rgba(0,0,0,0.4)]
-          transition-all duration-300
-          hover:bg-[#0C7B79] hover:text-white
-          hover:shadow-[0_0_40px_rgba(255,255,255,0.45)]
-          hover:-translate-y-1 hover:scale-[1.03]
-          active:translate-y-0 active:scale-100
-          active:shadow-[0_10px_25px_rgba(0,0,0,0.45)]
-        "
+    rounded-full px-10 py-4 text-lg font-sans h-auto
+    bg-white/95 text-[#0D4341] border border-white/70
+    shadow-[0_18px_40px_rgba(0,0,0,0.4)]
+    transition-all duration-300
+    hover:bg-[#e7a754] hover:text-[#011817]
+    hover:shadow-[0_0_40px_rgba(216,182,138,0.75)]
+    hover:-translate-y-1 hover:scale-[1.03]
+    active:translate-y-0 active:scale-100
+    active:shadow-[0_10px_25px_rgba(0,0,0,0.45)]
+  "
               >
                 Step inside VAMA
               </Button>
@@ -251,8 +251,8 @@ export default function Page() {
         </section>
       </main>
 
-      {/* Footer — also same green now */}
-      <footer className="bg-[#0D4341] text-white py-16 border-t border-white/10">
+      {/* Footer — now same pink bg */}
+      <footer className="bg-[#D8B68A] text-white py-16 border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-center text-center space-y-6">
             <h2 className="text-3xl font-serif font-bold">VAMA Living</h2>

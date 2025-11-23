@@ -6,12 +6,12 @@ import Header from "@/components/header";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#0D4341] text-white">
+    <div className="min-h-screen bg-[#3e0708] text-white">
       {/* Header */}
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-24 bg-[#0D4341]">
+      <section className="pt-32 pb-24 bg-[#3b0405]">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-5xl md:text-6xl font-serif font-bold leading-tight mb-6 text-balance">
@@ -27,7 +27,7 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-24 bg-[#0B3B38]">
+      <section className="py-24 bg-[#330304]">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -66,7 +66,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 bg-[#062629]">
+      <section className="py-24 bg-[#390404]">
         <div className="container mx-auto px-6">
           <h3 className="text-4xl md:text-5xl font-serif font-bold text-center mb-16">
             What We Stand For
@@ -127,7 +127,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-black via-[#052120] to-[#0D4341] text-white">
+      <section className="py-24 bg-gradient-to-br from-white via-[#3e0708] to-[#e65f61] text-white">
         <div className="container mx-auto px-6 text-center">
           <h3 className="text-4xl md:text-5xl font-serif font-bold mb-6">
             Ready to Transform Your Space?
@@ -146,7 +146,7 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-16 border-t border-white/10">
+      <footer className="bg-#3e0708 text-white py-16 border-t border-white/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-center text-center space-y-6">
             <h2 className="text-3xl font-serif font-bold">VAMA Living</h2>

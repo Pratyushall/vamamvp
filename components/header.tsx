@@ -22,7 +22,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-3">
           <div className="flex items-center">
             <Image
-              src="/images/logo1.png" // change if your path is different
+              src="/images/logo1.png"
               alt="VAMA Living logo"
               width={220}
               height={60}
@@ -42,22 +42,22 @@ export default function Header() {
             className="
               text-sm font-medium text-gray-800/80
               transition-all duration-200
-              hover:text-[#0C7B79]
+              hover:text-[#5d3807]
               hover:-translate-y-0.5
             "
           >
-            Work
+            Our Products
           </Link>
           <Link
             href="/about"
             className="
               text-sm font-medium text-gray-800/80
               transition-all duration-200
-              hover:text-[#0C7B79]
+              hover:text-[#432702]
               hover:-translate-y-0.5
             "
           >
-            About
+            Our Story
           </Link>
         </nav>
 
@@ -70,8 +70,9 @@ export default function Header() {
               bg-black text-white
               shadow-[0_10px_25px_rgba(0,0,0,0.35)]
               transition-all duration-300
-              hover:bg-[#0C7B79]
-              hover:shadow-[0_0_30px_rgba(12,123,121,0.65)]
+              hover:bg-[#c08737]
+              hover:text-[#0b1901]
+              hover:shadow-[0_0_30px_rgba(216,182,138,0.75)]
               hover:-translate-y-0.5 hover:scale-[1.03]
               active:translate-y-0 active:scale-100
             "
